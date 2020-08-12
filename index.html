@@ -106,7 +106,7 @@
                 
                     clearInterval(this.tick)
                 
-                    if (confirm('Game Over. Restart?')) {
+                    if (confirm(`Game Over. Your score is ${this.score}. Wanna restart?`)) {
                         this.start()
                     }
                 }
