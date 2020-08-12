@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Color Game</title>
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<style>
+    body {
+        background-color: #DFDBE5;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    }
+</style>
+</head>
+<body>
+    <div x-data="game()" x-init="start" class="flex h-screen justify-center items-center">
+        <div>
+            <div
+                x-text="timer"
+                class="text-5xl font-semibold text-center mb-4"
+                :class="'text-' + randomColor() + '-500'"
+            ></div>
+            <div class="flex flex-wrap justify-center mb-4" style="width: 30rem;">
+                <template x-for="(card, index) in cards">
+                    <button
+                        type="button"
+                        x-text="card.displayColor"
+                        class="flex items-center justify-center w-24 h-24 text-white uppercase tracking-wide font-semibold"
+                        :class="'bg-' + card.actualColor + '-500'"
+                        :key="index"
+                        @click="select(card)"
+                    ></button>
+                </template>
+            </div>
+            <div
+                x-text="'Score: ' + score"
+                class="text-2xl font-semibold text-center text-pink-500 mb-4"
+            ></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/collect.js/4.28.2/collect.js"></script>
+    <script>
+        function game() {
+            return {
+                tick: null,
+                timerLimit: 7,
+                timer: 1,
+                
+                playing: false,
+                score: 0,
+                
+                colors: [ 'gray', 'red', 'orange', 'yellow', 'green', 'teal', 'blue', 'indigo', 'purple', 'pink' ], // colors provided by tailwind css
+                cards: [],
+                cardQuantity: 25,
+                
+                start() {
+                    this.playing = true
+                    this.score = 0
+                    
+                    this.changeColors()
+                    
+                    this.timer = 1
+                    this.tick = setInterval(() => {
+                        (this.timer == this.timerLimit) ? this.gameOver() : this.timer++
+                    }, 1000)
+                },
+                
+                select(card) {
+                    if (! this.playing) {
+                        return
+                    }
+                    
+                    if (card.displayColor == card.actualColor) {
+                        this.timer = 0
+                        this.score++
+                        this.changeColors()
+                    }
+                },
+            
+                changeColors() {
+                    let color = this.randomColor()
+                    let correctColor = {
+                        actualColor: color,
+                        displayColor: color
+                    }
+                
+                    this.cards = collect()
+                        .times((this.cardQuantity - 1), () => {
+                            return {
+                                actualColor: this.randomColor(),
+                                displayColor: this.randomColor()
+                            }
+                        })
+                        .push(correctColor)
+                        .shuffle()
+                        .all()
+                },
+            
+                randomColor() {
+                    return collect(this.colors).random()
+                },
+                
+                gameOver() {
+                    this.playing = false
+                
+                    clearInterval(this.tick)
+                
+                    if (confirm('Game Over. Restart?')) {
+                        this.start()
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
