@@ -15,7 +15,7 @@
     <div x-data="game()" x-init="start" class="flex h-screen justify-center items-center">
         <div>
             <div
-                x-text="timer"
+                x-text="displayTimer"
                 class="text-5xl font-semibold text-center mb-4"
                 :class="'text-' + randomColor() + '-500'"
             ></div>
@@ -64,6 +64,10 @@
                     this.tick = setInterval(() => {
                         (this.timer == this.timerLimit) ? this.gameOver() : this.timer++
                     }, 1000)
+                },
+
+                get displayTimer() {
+                    return (this.timerLimit + 1) - this.timer
                 },
                 
                 select(card) {
