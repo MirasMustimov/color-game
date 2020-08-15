@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="Miggi Color Game is a little game where you have to find cards with matching color name and background.">
 <title>Color Game</title>
 <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 <style>
@@ -14,6 +15,10 @@
 <body>
     <div x-data="game()" x-init="start" class="flex h-screen justify-center items-center">
         <div>
+            <h1 class="text-xl font-bold text-center mb-3">
+                <span class="text-purple-500">M</span><span class="text-indigo-500">i</span><span class="text-pink-500">g</span><span class="text-pink-500">g</span><span class="text-purple-500">i</span><span class="text-pink-500"> </span><span class="text-blue-500">C</span><span class="text-red-500">o</span><span class="text-purple-500">l</span><span class="text-orange-500">o</span><span class="text-gray-500">r</span><span class="text-yellow-500"> </span><span class="text-blue-500">G</span><span class="text-purple-500">a</span><span class="text-red-500">m</span><span class="text-indigo-500">e</span>
+            </h1>
+
             <div
                 x-text="displayTimer"
                 class="text-5xl font-semibold text-center mb-4"
