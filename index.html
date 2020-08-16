@@ -16,6 +16,7 @@
     <div class="flex flex-col min-h-screen">
         <div x-data="game()" x-init="start" class="flex flex-1 justify-center items-center">
             <div>
+                <!-- Game name -->
                 <h1 class="text-xl font-bold text-center mb-3">
                     <span class="text-purple-500">M</span><span class="text-indigo-500">i</span><span class="text-pink-500">g</span><span class="text-pink-500">g</span><span class="text-purple-500">i</span><span class="text-pink-500"> </span><span class="text-blue-500">C</span><span class="text-red-500">o</span><span class="text-purple-500">l</span><span class="text-orange-500">o</span><span class="text-gray-500">r</span><span class="text-yellow-500"> </span><span class="text-blue-500">G</span><span class="text-purple-500">a</span><span class="text-red-500">m</span><span class="text-indigo-500">e</span>
                 </h1>
@@ -25,6 +26,7 @@
                     class="text-5xl font-semibold text-center mb-4"
                     :class="'text-' + randomColor() + '-500'"
                 ></div>
+
                 <div class="flex flex-wrap justify-center mb-4" style="width: 30rem;">
                     <template x-for="(card, index) in cards">
                         <button
@@ -37,6 +39,7 @@
                         ></button>
                     </template>
                 </div>
+                
                 <div
                     x-text="'Score: ' + score"
                     class="text-2xl font-semibold text-center text-pink-500 mb-4"
