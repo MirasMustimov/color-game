@@ -14,7 +14,7 @@
 </head>
 <body>
     <div x-data="game()" x-init="changeColors" class="flex flex-col items-center min-h-screen">
-        <div class="fixed top-0 left-0 mt-3 ml-3 rounded-lg shadow-2xl bg-pink-500 text-white p-2">
+        <div x-show="! playing" class="fixed top-0 left-0 mt-3 ml-3 rounded-lg shadow-2xl bg-pink-500 text-white p-2">
             <div class="mb-2">
                 <p>Find cards with matching color name and background.</p>
                 <p>Click `Start` button to play.</p>
