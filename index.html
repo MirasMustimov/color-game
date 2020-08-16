@@ -38,6 +38,11 @@
                     x-text="'Score: ' + displayScore"
                     class="text-2xl font-semibold text-center text-pink-500 mb-4"
                 ></div>
+
+                <div
+                    x-text="'Level: ' + level + '/' + 3"
+                    class="text-2xl font-semibold text-center text-green-500"
+                ></div>
             </div>
         </div>
 
@@ -57,7 +62,7 @@
         function game() {
             return {
                 tick: null,
-                timerLimit: 7,
+                timerLimit: 30,
                 timer: 1,
                 
                 playing: false,
@@ -87,16 +92,30 @@
                     return this.score * 10
                 },
 
+                get level() {
+                    if (this.score < 10) {
+                        return 1
+                    }
+
+                    if (this.score < 20) {
+                        return 2
+                    }
+
+                    return 3
+                },
+
                 get levelAnimationClass() {
-                    if (this.score >= 10) {
+                    if (this.level == 1) {
+                        return ''
+                    }
+
+                    if (this.level == 2) {
                         return 'animate-bounce'
                     }
 
-                    if (this.score >= 20) {
+                    if (this.level == 3) {
                         return 'animate-spin'
                     }
-
-                    return ''
                 },
                 
                 select(card) {
