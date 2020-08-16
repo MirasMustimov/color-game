@@ -13,8 +13,25 @@
 </style>
 </head>
 <body>
-    <div class="flex flex-col min-h-screen">
-        <div x-data="game()" x-init="start" class="flex flex-1 justify-center items-center">
+    <div x-data="game()" x-init="changeColors" class="flex flex-col items-center min-h-screen">
+        <div class="fixed top-0 left-0 mt-3 ml-3 rounded-lg shadow-2xl bg-pink-500 text-white p-2">
+            <div class="mb-2">
+                <p>Find cards with matching color name and background.</p>
+                <p>Click `Start` button to play.</p>
+            </div>
+            <p class="uppercase">Not recommended for people with epilepsy!</p>
+        </div>
+
+        <button
+            x-show="! playing"
+            type="button"
+            class="text-white bg-green-500 hover:bg-purple-500 py-2 px-6 mt-4 uppercase tracking-wide rounded-lg shadow-2xl"
+            @click="start"
+        >
+            Start
+        </button>
+
+        <div class="flex flex-1 justify-center items-center">
             <div>
                 <div
                     x-text="displayTimer"
